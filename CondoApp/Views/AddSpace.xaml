@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CondoApp.Views.AddSpace"
+              xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:viewmodels="clr-namespace:CondoApp.ViewModels">
+    <ContentPage.BindingContext>
+        <viewmodels:AddSpaceViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Admin >" FontSize="16" Margin="20,35,20,0"/>
+            <Label Text="Crear Espacio" FontSize="22"  FontAttributes="Bold" Margin="20,-15,20,20"/>
+            <inputLayout:SfTextInputLayout  HelperText="{Binding NameError, Mode=TwoWay}" Hint="Tipo" Padding="20,0, 40,0">
+                <Entry Text="{Binding Name}" />
+            </inputLayout:SfTextInputLayout>
+            <inputLayout:SfTextInputLayout  HelperText="{Binding FloorError, Mode=TwoWay}" Hint="Piso" Padding="20,0, 40,0">
+                <Entry Text="{Binding Floor}" />
+            </inputLayout:SfTextInputLayout>
+            <inputLayout:SfTextInputLayout  HelperText="{Binding  ImageUrlError, Mode=TwoWay}" Hint="URL de Imagen" Padding="20,0, 40,0">
+                <Entry Text="{Binding ImageUrl}" />
+            </inputLayout:SfTextInputLayout>
+
+            <buttons:SfButton x:Name="addbutton" Command="{Binding AddCommand}" CornerRadius="3" FontSize="24" HeightRequest="50" Margin="160,5" Text="Crear" BackgroundColor = "DeepSkyBlue" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

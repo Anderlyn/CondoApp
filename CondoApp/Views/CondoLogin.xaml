@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 x:Class="CondoApp.Views.CondoLogin"
+             xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms" xmlns:viewmodels="clr-namespace:CondoApp.ViewModels" x:DataType="viewmodels:LoginViewModel"
+             xmlns:sfPopup="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms">
+    <ContentPage.BindingContext>
+        <viewmodels:LoginViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        
+        <StackLayout>
+            <Image  Margin="0,60,0,0" Source="https://cdn-icons-png.flaticon.com/512/1259/1259768.png" WidthRequest="150"/>
+            <Label Margin="0,0,0,0" HorizontalTextAlignment="center" FontSize="45" FontAttributes="Bold">CondoApp</Label>
+            <Label Margin="0,0,0,35" HorizontalTextAlignment="center" FontSize="22">Tu Casa, Donde Sea.</Label>
+
+            <inputLayout:SfTextInputLayout  HelperText="{Binding EmailError, Mode=TwoWay}" Hint="Correo" Padding="40,0">
+                <Entry Text="{Binding Email}" />
+            </inputLayout:SfTextInputLayout>
+
+            <inputLayout:SfTextInputLayout HelperText="{Binding PasswordError, Mode=TwoWay}" EnablePasswordVisibilityToggle="true" Hint="Contraseña" Padding="40,15">
+                <Entry Text="{Binding Password}" />
+            </inputLayout:SfTextInputLayout>
+
+            <buttons:SfButton IsEnabled="{Binding IsChecking, Mode=TwoWay}" x:Name="SfButton" Command="{Binding loginCommand}" CornerRadius="3" FontSize="24" HeightRequest="50" Margin="160,5" Text="Ingresar" BackgroundColor = "DeepSkyBlue" />
+
+            <sfPopup:SfPopupLayout x:Name="popup" IsOpen="{Binding IsIncorrect}">
+                <sfPopup:SfPopupLayout.PopupView>
+                    <sfPopup:PopupView>
+                        <sfPopup:PopupView.HeaderTemplate>
+                            <DataTemplate x:Name="header">
+                                <StackLayout>
+                                    <Label FontSize="24" Text="Ingreso Incorrecto" HorizontalTextAlignment="Center" FontAttributes="Bold" />
+                                </StackLayout>
+                            </DataTemplate>
+                        </sfPopup:PopupView.HeaderTemplate>
+                        <sfPopup:PopupView.ContentTemplate>
+                            <DataTemplate x:Name="content">
+                                <StackLayout>
+                                    <Label FontSize="20" Padding="30" Text="Las credenciales ingresadas no son correctas, por favor revise los datos." VerticalOptions="Center" HorizontalOptions="Center"/>
+                                </StackLayout>
+                            </DataTemplate>
+                        </sfPopup:PopupView.ContentTemplate>
+                    </sfPopup:PopupView>
+                </sfPopup:SfPopupLayout.PopupView>
+            </sfPopup:SfPopupLayout>
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

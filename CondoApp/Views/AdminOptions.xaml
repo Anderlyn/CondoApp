@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodels="clr-namespace:CondoApp.ViewModels"
+             x:Class="CondoApp.Views.AdminOptions"
+              xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms" 
+             xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             >
+    <ContentPage.BindingContext>
+        <viewmodels:AdminOptionsViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <FlexLayout JustifyContent="SpaceBetween">
+                <StackLayout>
+                    <Label Text="Condo >" FontSize="16" Margin="20,35,20,0"/>
+                    <Label Text="Admin" FontSize="22"  FontAttributes="Bold" Margin="20,-15,20,20"/>
+                </StackLayout>
+            </FlexLayout>
+
+            <syncfusion:SfListView IsVisible="{Binding IsLoaded, Mode=TwoWay}" ItemSize="100" x:Name="reservationlist" ItemsSource="{Binding MenuOptions}" >
+                <syncfusion:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid  Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*" />
+                            </Grid.RowDefinitions>
+                            <FlexLayout FlowDirection="LeftToRight"  JustifyContent="SpaceBetween" BackgroundColor="White" AlignContent="Center" Padding="0, 19, 30, 0">
+                                <StackLayout>
+                                    <FlexLayout>
+                                        <Label Margin="15, 0, 0, 0" Text="{Binding option}" FontAttributes="Bold" TextColor="black" FontSize="26" />
+                                    </FlexLayout>
+                                </StackLayout>
+                                <ImageButton Command="{Binding openCommand}" HeightRequest="50" BackgroundColor="Transparent" Source="https://cdn-icons-png.flaticon.com/512/130/130884.png" />
+                            </FlexLayout>
+                        </Grid>
+                    </DataTemplate>
+                </syncfusion:SfListView.ItemTemplate>
+            </syncfusion:SfListView>
+         </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

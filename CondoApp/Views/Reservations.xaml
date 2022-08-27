@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CondoApp.Views.Reservations"
+             xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms" xmlns:viewmodels="clr-namespace:CondoApp.ViewModels"
+              xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+             xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms">
+    <ContentPage.BindingContext>
+        <viewmodels:ReservationsViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <FlexLayout JustifyContent="SpaceBetween">
+                <StackLayout>
+                    <Label Text="Condo >" FontSize="16" Margin="20,35,20,0"/>
+                    <Label Text="Reservaciones" FontSize="22"  FontAttributes="Bold" Margin="20,-15,20,20"/>
+                </StackLayout>
+                <StackLayout>
+                    <button:SfButton Command="{Binding OwnedCommand}" Margin="20,35,20,0" x:Name="button" TextColor="RosyBrown" BackgroundColor="Transparent"  ImageSource="https://cdn-icons-png.flaticon.com/512/181/181540.png" ShowIcon="True" ImageWidth="50">
+                    </button:SfButton>
+                </StackLayout>
+            </FlexLayout>
+
+            <syncfusion:SfListView IsVisible="{Binding IsLoaded, Mode=TwoWay}" ItemSize="100" x:Name="reservationlist" ItemsSource="{Binding ReservationTypes}" >
+                <syncfusion:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid  Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*" />
+                            </Grid.RowDefinitions>
+                            <FlexLayout FlowDirection="LeftToRight"  JustifyContent="SpaceBetween" BackgroundColor="White" AlignContent="Center" Padding="0, 19, 30, 0">
+                                <StackLayout>
+                                    <FlexLayout>
+                                        <Image Source="{Binding imageUrl}"  HeightRequest="50"/>
+                                        <Label Margin="15, 0, 0, 0" Text="{Binding type}" FontAttributes="Bold" TextColor="black" FontSize="26" />
+                                        <Label Padding="0, 5" Margin="8, 3" FontAttributes="Italic" Grid.Row="1" Text="Piso" TextColor="black" FontSize="12"/>
+
+                                        <Label Padding="0, 5" Margin="-5, 3" FontAttributes="Italic" Grid.Row="1" Text="{Binding floor}" TextColor="black" FontSize="12"/>
+                                    </FlexLayout>
+                                </StackLayout>
+                                <ImageButton Command="{Binding reserveCommand}" HeightRequest="50" BackgroundColor="Transparent" Source="https://cdn-icons-png.flaticon.com/512/130/130884.png" />
+                            </FlexLayout>
+                        </Grid>
+                    </DataTemplate>
+                </syncfusion:SfListView.ItemTemplate>
+            </syncfusion:SfListView>
+
+            <busyindicator:SfBusyIndicator IsVisible="{Binding IsFetching, Mode=TwoWay}" x:Name="loading" 
+                                       Title="Cargando Espacios..."
+                                       AnimationType="Box" 
+                                       BackgroundColor="Transparent"
+                                       TextColor="Black"/>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

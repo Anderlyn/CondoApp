@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodels="clr-namespace:CondoApp.ViewModels"
+             xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+             x:Class="CondoApp.Views.OwnedReservations">
+    <ContentPage.BindingContext>
+        <viewmodels:OwnedReservationsViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Label Text="Reservaciones >" FontSize="16" Margin="20,35,20,0"/>
+                <Label Text="{Binding DisplayName}" FontSize="32"  FontAttributes="Bold" Margin="20,-15,20,20"/>
+
+                <syncfusion:SfListView IsVisible="{Binding IsLoaded, Mode=TwoWay}" ItemSize="100" x:Name="personalist" ItemsSource="{Binding Reservations}" >
+                    <syncfusion:SfListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid  Padding="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*" />
+                                </Grid.RowDefinitions>
+                                <FlexLayout FlowDirection="LeftToRight"  JustifyContent="SpaceBetween" BackgroundColor="White" AlignContent="Center" Padding="0, 19, 30, 0">
+                                    <StackLayout>
+                                        <StackLayout>
+                                            <Label Margin="15, 0, 0, 0" Text="{Binding type}" FontAttributes="Bold" TextColor="black" FontSize="26" />
+                                            <FlexLayout Margin="0, -10">
+                                                <Label Padding="0, 0" Margin="15, 3, 0 , 0" FontAttributes="Italic" Grid.Row="1" Text="Dia: " TextColor="black" FontSize="12"/>
+                                                <Label Padding="0, 0" Margin="0, 3" FontAttributes="Italic" Grid.Row="1" Text="{Binding formattedDate}" TextColor="black" FontSize="12"/>
+                                            </FlexLayout>
+                                        </StackLayout>
+                                    </StackLayout>
+                                    <ImageButton Command="{Binding deleteCommand}" HeightRequest="50" BackgroundColor="Transparent" Source="https://cdn-icons-png.flaticon.com/512/1828/1828843.png" />
+                                </FlexLayout>
+                            </Grid>
+                        </DataTemplate>
+                    </syncfusion:SfListView.ItemTemplate>
+                </syncfusion:SfListView>
+
+                <busyindicator:SfBusyIndicator IsVisible="{Binding IsFetching, Mode=TwoWay}" x:Name="reservation_loading" 
+                                       Title="Cargando Tus Reservaciones..."
+                                       AnimationType="MovieTimer" 
+                                       BackgroundColor="Transparent"
+                                       TextColor="Black"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodels="clr-namespace:CondoApp.ViewModels"
+             xmlns:syncfusion="clr-namespace:Syncfusion.XForms.Pickers;assembly=Syncfusion.SfPicker.XForms"
+             xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:sfPopup="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
+             x:Class="CondoApp.Views.CreateReservation">
+    <ContentPage.BindingContext>
+        <viewmodels:CreateReservationViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="{Binding ReservationType, Mode=TwoWay}" FontSize="16" Margin="20,35,20,0"/>
+            <Label Text="Crear Reservacion" FontSize="22"  FontAttributes="Bold" Margin="20,-15,20,20"/>
+            <StackLayout Margin="0,0">
+                <Label Text="Elige tu Hora" FontSize="18"  FontAttributes="Italic" Margin="20,0,2,10"/>
+                <syncfusion:SfTimePicker  Margin="20, 0"  HeightRequest="150" ShowColumnHeader="false" x:Name="time" HeaderText="Hora de Reserva" Time="{Binding SelectedHour, Mode=TwoWay}" HourInterval="1" MinuteInterval="60" SecondInterval="60"/>
+                <Label Text="Elige tu Dia" FontSize="18"  FontAttributes="Italic" Margin="20,5,2,10"/>
+                <syncfusion:SfDatePicker HeightRequest="250" x:Name="datepicker" HeaderText="Dia de Reserva"
+                                 Date="{Binding SelectedDate, Mode=TwoWay}"  ShowColumnHeader="True" Margin="20, 0" />
+                <StackLayout>
+                    <button:SfButton IsEnabled="True" WidthRequest="150" Command="{Binding SaveCommand, Mode=TwoWay}" Margin="150,15" x:Name="button" FontSize="22" TextColor="White" Text="Guardar" >
+                    </button:SfButton>
+                </StackLayout>
+            </StackLayout>
+
+            <sfPopup:SfPopupLayout x:Name="popup" IsOpen="{Binding IsIncorrect, Mode=TwoWay}">
+                <sfPopup:SfPopupLayout.PopupView>
+                    <sfPopup:PopupView>
+                        <sfPopup:PopupView.HeaderTemplate>
+                            <DataTemplate x:Name="header">
+                                <StackLayout>
+                                    <Label FontSize="24" Text="Espacio Ocupado" HorizontalTextAlignment="Center" FontAttributes="Bold" />
+                                </StackLayout>
+                            </DataTemplate>
+                        </sfPopup:PopupView.HeaderTemplate>
+                        <sfPopup:PopupView.ContentTemplate>
+                            <DataTemplate x:Name="content">
+                                <StackLayout>
+                                    <Label FontSize="20" Padding="30" Text="Parece que este espacio ya esta reservado por otro condomino(a)." VerticalOptions="Center" HorizontalOptions="Center"/>
+                                </StackLayout>
+                            </DataTemplate>
+                        </sfPopup:PopupView.ContentTemplate>
+                    </sfPopup:PopupView>
+                </sfPopup:SfPopupLayout.PopupView>
+            </sfPopup:SfPopupLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

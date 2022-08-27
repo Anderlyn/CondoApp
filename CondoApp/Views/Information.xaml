@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodels="clr-namespace:CondoApp.ViewModels"
+             x:Class="CondoApp.Views.Information"
+                          xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             >
+    <ContentPage.BindingContext>
+        <viewmodels:InformationViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Condo >" FontSize="16" Margin="20,35,20,0"/>
+            <Label Text="Informacion Personal" FontSize="22"  FontAttributes="Bold" Margin="20,-15,20,20"/>
+            <inputLayout:SfTextInputLayout  HelperText="{Binding NameError, Mode=TwoWay}" Hint="Nombre" Padding="20,0, 40,0">
+                <Entry Text="{Binding Name}" />
+            </inputLayout:SfTextInputLayout>
+            <inputLayout:SfTextInputLayout  HelperText="{Binding LastNameError, Mode=TwoWay}" Hint="Apellido" Padding="20,0, 40,0">
+                <Entry Text="{Binding LastName}" />
+            </inputLayout:SfTextInputLayout>
+            <Label Text="Apartamento" FontSize="16" Margin="20,0,20,0"/>
+            <Label Text="{Binding Apartment}" FontSize="20" FontAttributes="Bold" Margin="20,0,20,0"/>
+            <Label Text="Correo" FontSize="16" Margin="20,10,20,0"/>
+            <Label Text="{Binding Email}" FontSize="20" FontAttributes="Bold" Margin="20,0,20,15"/>
+
+            <buttons:SfButton x:Name="SfButton" Command="{Binding UpdateCommand}" CornerRadius="3" FontSize="24" HeightRequest="50" Margin="160,5" Text="Actualizar" BackgroundColor = "DeepSkyBlue" />
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

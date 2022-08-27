@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodels="clr-namespace:CondoApp.ViewModels"
+             x:Class="CondoApp.Views.ReservationCalendar"
+             xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+             xmlns:syncfusion="clr-namespace:Syncfusion.SfCalendar.XForms;assembly=Syncfusion.SfCalendar.XForms"
+             xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             >
+    <ContentPage.BindingContext>
+        <viewmodels:ReservationCalendarViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout BackgroundColor="white">
+                <FlexLayout JustifyContent="SpaceBetween">
+                    <StackLayout>
+                        <Label Text="Reservaciones >" FontSize="16" Margin="20,35,20,0"/>
+                        <Label Text="{Binding ReservationType, Mode=TwoWay}" FontSize="22"  FontAttributes="Bold" Margin="20,-15,20,20"/>
+                    </StackLayout>
+                    <StackLayout>
+                        <button:SfButton Command="{Binding AddCommand}" Margin="20,35,20,0" x:Name="button" TextColor="RosyBrown" BackgroundColor="Transparent"  ImageSource="https://cdn-icons-png.flaticon.com/512/1828/1828817.png" ShowIcon="True" ImageWidth="50">
+                        </button:SfButton>
+                    </StackLayout>
+                </FlexLayout>
+
+                <syncfusion:SfCalendar IsVisible="{Binding IsLoaded, Mode=TwoWay}" MinDate="{Binding MinDate}" BackgroundColor="White"  HeightRequest="650" x:Name="calendar" ViewMode="MonthView" ShowInlineEvents="True" InlineViewMode="Agenda" MaximumEventIndicatorCount="1" DataSource="{Binding Appointments, Mode=TwoWay}">
+                </syncfusion:SfCalendar>
+
+                <busyindicator:SfBusyIndicator IsVisible="{Binding IsFetching, Mode=TwoWay}" x:Name="reservation_loading" 
+                                       Title="Cargando Reservaciones..."
+                                       AnimationType="MovieTimer" 
+                                       BackgroundColor="Transparent"
+                                       TextColor="Black"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
